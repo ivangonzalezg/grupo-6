@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="txt_registro">Register your data</string>
+    <string name="txt_names">Names</string>
+    <string name="txt_lnames">Last names</string>
+    <string name="txt_mail">E-mail</string>
+    <string name="txt_pwd">Password</string>
+    <string name="txt_terminos">I accept terms, policies and conditions.</string>
+    <string name="btn_enviar">Send</string>
 </resources>
