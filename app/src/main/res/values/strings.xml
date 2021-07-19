@@ -16,4 +16,11 @@
         <p>Esta compañía no venderá, cederá ni distribuirá la información personal que es recopilada sin su consentimiento, salvo que sea requerido por un juez con un orden judicial.</p><br />
         <p>TIENDA se reserva el derecho de cambiar los términos de la presente Política de Privacidad en cualquier momento.</p>
     </string>
+    <string name="txt_registro">Register your data</string>
+    <string name="txt_names">Names</string>
+    <string name="txt_lnames">Last names</string>
+    <string name="txt_mail">E-mail</string>
+    <string name="txt_pwd">Password</string>
+    <string name="txt_terminos">I accept terms, policies and conditions.</string>
+    <string name="btn_enviar">Send</string>
 </resources>
