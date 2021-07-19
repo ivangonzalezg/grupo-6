@@ -2,7 +2,6 @@ package com.mintic.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -24,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mySelf = this;
         et_username = findViewById(R.id.et_username);
         et_password = findViewById(R.id.et_password);
@@ -83,7 +81,5 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 }

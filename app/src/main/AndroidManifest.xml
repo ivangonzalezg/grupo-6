@@ -11,6 +11,8 @@
         android:theme="@style/Theme.MyApplication">
         <activity android:name=".NavigationDrawer"></activity>
         <activity android:name=".SignUp" />
+        <activity android:name=".TermsActivity"></activity>
+        <activity android:name=".ActivityRegister"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
