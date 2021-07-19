@@ -43,14 +43,7 @@ public class ActivityRegister extends AppCompatActivity {
         act_terminos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //TODO: Activar y actualizar TermCond por el nombre de la actividad que contiene términos y condiciones
-                /*Intent terminos = new Intent(mySelf, TermCond.class);
-                startActivity((terminos));
-*/
-
-                Log.i(TAG, "onClick: abrir terminos");
-
+                startActivity(new Intent(ActivityRegister.this, TermsActivity.class));
             }
         });
 
