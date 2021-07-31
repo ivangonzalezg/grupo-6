@@ -8,7 +8,22 @@
     <string name="login_password">Contraseña</string>
     <string name="login_email">Correo electrónico</string>
     <string name="login_submit_button">Iniciar sesión</string>
-    <string name="login_register_button">¿Aún no tienes una cuenta? Regístrate</string>
+    <string name="login_register_button">¿Aún no tienes una cuenta? <b>Regístrate</b></string>
     <string name="login_error_email">Correo electrónico es requerido</string>
     <string name="login_error_password">Contraseña es requerida</string>
+    <string name="register_title">Regístrate</string>
+    <string name="register_email">Correo electrónico</string>
+    <string name="register_email_hint">juan.perez@ejemplo.com</string>
+    <string name="register_password">Contraseña</string>
+    <string name="register_submit_button">Registrarse</string>
+    <string name="register_first_name">Nombre(s)</string>
+    <string name="register_first_name_hint">Juan</string>
+    <string name="register_last_name">Apellido(s)</string>
+    <string name="register_last_name_hint">Pérez</string>
+    <string name="register_checkbox">"Aceptar nuestros "</string>
+    <string name="register_terms_and_conditions"><b>terminos y condiciones</b></string>
+    <string name="register_error_first_name">Nombre(s) es requerido</string>
+    <string name="register_error_last_name">Apellido(s) es requerido</string>
+    <string name="register_error_email">Correo electrónico es requerido</string>
+    <string name="register_error_password">Contraseña es requerida</string>
 </resources>

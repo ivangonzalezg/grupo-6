@@ -3,6 +3,7 @@ package com.mintic.marketplace;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -48,11 +49,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(this, R.string.login_error_password, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                // TODO: Open home activity
+                // TODO: Validate user with firebase authentication
+                // TODO: Open home activity if user is registered
                 break;
             case R.id.register_button:
-                Log.i(TAG, "onClick: ");
-                // TODO: Open register activity
+                startActivity(new Intent(this, RegisterActivity.class));
                 break;
             default:
                 break;

@@ -11,4 +11,20 @@
     <string name="login_register_button">Don\'t you have an account? <b>Register</b></string>
     <string name="login_error_email">Email is required</string>
     <string name="login_error_password">Password is required</string>
+    <string name="register_title">Register</string>
+    <string name="register_first_name">First name</string>
+    <string name="register_first_name_hint">John</string>
+    <string name="register_last_name">Last name</string>
+    <string name="register_last_name_hint">Doe</string>
+    <string name="register_email">Email</string>
+    <string name="register_email_hint">john.doe@example.com</string>
+    <string name="register_password">Password</string>
+    <string name="register_password_hint" translatable="false">********</string>
+    <string name="register_checkbox">Accept our </string>
+    <string name="register_terms_and_conditions"><b>Terms and conditions</b></string>
+    <string name="register_submit_button">Register</string>
+    <string name="register_error_first_name">First name is required</string>
+    <string name="register_error_last_name">Last name is required</string>
+    <string name="register_error_email">Email is required</string>
+    <string name="register_error_password">Password is required</string>
 </resources>
