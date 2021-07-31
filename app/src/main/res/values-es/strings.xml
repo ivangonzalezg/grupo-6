@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Marketplace</string>
+    <string name="login_logo_content_description">Marketplace logo</string>
+    <string name="login_title">Iniciar sesión</string>
+    <string name="login_subtitle">¡Hola! Qué gusto verte de nuevo.</string>
+    <string name="login_email_hint">juan.perez@ejemplo.com</string>
+    <string name="login_password">Contraseña</string>
+    <string name="login_email">Correo electrónico</string>
+    <string name="login_submit_button">Iniciar sesión</string>
+    <string name="login_register_button">¿Aún no tienes una cuenta? Regístrate</string>
+    <string name="login_error_email">Correo electrónico es requerido</string>
+    <string name="login_error_password">Contraseña es requerida</string>
+</resources>
