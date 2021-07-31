@@ -3,6 +3,7 @@ package com.mintic.marketplace;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -53,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 }
                 break;
             case R.id.term_and_conditions_textview:
-                // TODO: Open terms and conditions activity
+                startActivity(new Intent(this, TermsAndConditionsActivity.class));
                 break;
             case R.id.register_button:
                 String firstName = firstNameEditText.getText().toString();

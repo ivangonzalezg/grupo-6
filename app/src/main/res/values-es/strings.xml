@@ -21,9 +21,10 @@
     <string name="register_last_name">Apellido(s)</string>
     <string name="register_last_name_hint">Pérez</string>
     <string name="register_checkbox">"Aceptar nuestros "</string>
-    <string name="register_terms_and_conditions"><b>terminos y condiciones</b></string>
+    <string name="register_terms_and_conditions"><b>términos y condiciones</b></string>
     <string name="register_error_first_name">Nombre(s) es requerido</string>
     <string name="register_error_last_name">Apellido(s) es requerido</string>
     <string name="register_error_email">Correo electrónico es requerido</string>
     <string name="register_error_password">Contraseña es requerida</string>
+    <string name="terms_and_conditions_title">Términos y condiciones</string>
 </resources>
