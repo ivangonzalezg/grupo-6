@@ -11,6 +11,8 @@
     <string name="login_register_button">Don\'t you have an account? <b>Register</b></string>
     <string name="login_error_email">Email is required</string>
     <string name="login_error_password">Password is required</string>
+    <string name="login_error_authentication_failed">Authentication failed</string>
+    <string name="login_error_user_not_found">User not found</string>
     <string name="register_title">Register</string>
     <string name="register_first_name">First name</string>
     <string name="register_first_name_hint">John</string>
@@ -27,8 +29,14 @@
     <string name="register_error_last_name">Last name is required</string>
     <string name="register_error_email">Email is required</string>
     <string name="register_error_password">Password is required</string>
+    <string name="register_error_authentication_failed">Authentication failed</string>
     <string name="terms_and_conditions_title">Terms and conditions</string>
     <string name="terms_and_conditions_introduction" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget augue at nibh ullamcorper tristique. Nunc quis nulla id velit ultrices fermentum hendrerit sit amet nisi. In bibendum vel quam sit amet ullamcorper. Nunc aliquam quis leo ut lobortis. Fusce auctor massa ante, quis cursus est venenatis non. Morbi in tristique dui. In pretium justo at urna rhoncus pretium. In dapibus urna quis elit semper consequat. Aenean volutpat, odio ac pharetra finibus, mauris metus cursus purus, ac ultricies lectus nisi id massa. Pellentesque lobortis facilisis maximus. Donec viverra pellentesque arcu, condimentum malesuada enim tempus bibendum.</string>
     <string name="terms_and_conditions_body" translatable="false">Praesent ornare placerat odio ac pulvinar. Etiam in enim nec neque varius dictum. Suspendisse in ligula at massa tempor facilisis. Nulla facilisi. Maecenas suscipit purus quis lectus auctor, non viverra enim auctor. Aliquam aliquet neque dolor, et convallis ligula ullamcorper ut. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus tincidunt ipsum augue, eget sollicitudin nisi pulvinar sed. Pellentesque sit amet consequat odio. Praesent nec hendrerit nisi, aliquam aliquam ligula.</string>
     <string name="terms_and_conditions_conclusion" translatable="false">Morbi pharetra tincidunt risus, vel auctor ante dapibus ac. Donec quis elementum sapien, bibendum placerat eros. Integer feugiat elit a ultricies lobortis. Nam fringilla viverra nulla, eget lacinia nibh. Nulla dignissim ac urna ut sollicitudin. Nulla a vehicula diam. Suspendisse potenti.</string>
+    <string name="progress_dialog_title">Loading</string>
+    <string name="progress_dialog_message_registering">Registering user</string>
+    <string name="progress_dialog_message_logging_in">Logging in</string>
+    <string name="alert_dialog_message_register_confirm">Registered user. Sign in with your email and password.</string>
+    <string name="alert_dialog_positive_button_register_confirm">OK</string>
 </resources>

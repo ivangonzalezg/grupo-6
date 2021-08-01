@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "46382055537",
+    "project_id": "marketplace-mintic",
+    "storage_bucket": "marketplace-mintic.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:46382055537:android:2970819bc65bc314db1bd0",
+        "android_client_info": {
+          "package_name": "com.mintic.marketplace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "46382055537-6sn2nhi8lobb55gn1a1trfm2nmh8pbqd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfPUG2QxQTYDRHd9lWtibzs2OzbYhm7VY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "46382055537-6sn2nhi8lobb55gn1a1trfm2nmh8pbqd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
