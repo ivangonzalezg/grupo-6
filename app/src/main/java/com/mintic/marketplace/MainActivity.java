@@ -18,8 +18,7 @@ public class MainActivity extends AppCompatActivity {
         boolean isUserLoggedIn = SharedPref.getBoolean(this, Constants.isUserLoggedIn);
 
         if (isUserLoggedIn) {
-            // TODO: Open home activity
-            startActivity(new Intent(this, TermsAndConditionsActivity.class));
+            startActivity(new Intent(this, HomeActivity.class));
         } else {
             startActivity(new Intent(this, LoginActivity.class));
         }

@@ -84,8 +84,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             SharedPref.save(LoginActivity.this, Constants.lastName, (String) document.getData().get(Constants.lastName));
                                             SharedPref.save(LoginActivity.this, Constants.email, (String) document.getData().get(Constants.email));
                                             SharedPref.save(LoginActivity.this, Constants.isUserLoggedIn, true);
-                                            // TODO: Open home activity
-                                            Intent intent = new Intent(LoginActivity.this, TermsAndConditionsActivity.class);
+                                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                             startActivity(intent);
                                         } else {
