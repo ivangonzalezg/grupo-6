@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.mintic.marketplace.utils.Constants;
+import com.mintic.marketplace.utils.Keyboard;
 import com.mintic.marketplace.utils.SharedPref;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -56,6 +57,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(this, R.string.login_error_password, Toast.LENGTH_SHORT).show();
                     return;
                 }
+                Keyboard.hideSoft(this);
                 ProgressDialog progress = ProgressDialog.show(this, this.getResources().getString(R.string.progress_dialog_title), this.getResources().getString(R.string.progress_dialog_message_logging_in));
                 FirebaseAuth auth = FirebaseAuth.getInstance();
                 auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {

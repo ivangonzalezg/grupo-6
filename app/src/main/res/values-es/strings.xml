@@ -28,7 +28,7 @@
     <string name="register_error_password">Contraseña es requerida</string>
     <string name="terms_and_conditions_title">Términos y condiciones</string>
     <string name="register_error_authentication_failed">Autenticación fallida</string>
-    <string name="login_error_authentication_failed">Autenticación fallida</string>
+    <string name="login_error_authentication_failed">Autenticación fallida, por favor verifique su correo electrónico y contraseña</string>
     <string name="login_error_user_not_found">Usuario no encontrado</string>
     <string name="progress_dialog_title">Cargando</string>
     <string name="progress_dialog_message_registering">Registrando usuario</string>

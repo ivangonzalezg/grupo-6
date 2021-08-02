@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.mintic.marketplace.utils.Constants;
+import com.mintic.marketplace.utils.Keyboard;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -92,6 +93,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     Toast.makeText(this, R.string.register_error_password, Toast.LENGTH_SHORT).show();
                     return;
                 }
+                Keyboard.hideSoft(this);
                 ProgressDialog progress = ProgressDialog.show(this, this.getResources().getString(R.string.progress_dialog_title), this.getResources().getString(R.string.progress_dialog_message_registering));
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {

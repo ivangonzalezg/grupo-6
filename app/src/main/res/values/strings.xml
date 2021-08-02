@@ -11,7 +11,7 @@
     <string name="login_register_button">Don\'t you have an account? <b>Register</b></string>
     <string name="login_error_email">Email is required</string>
     <string name="login_error_password">Password is required</string>
-    <string name="login_error_authentication_failed">Authentication failed</string>
+    <string name="login_error_authentication_failed">Authentication failed, please verify your email and password</string>
     <string name="login_error_user_not_found">User not found</string>
     <string name="register_title">Register</string>
     <string name="register_first_name">First name</string>
