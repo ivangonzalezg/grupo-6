@@ -37,4 +37,20 @@
     <string name="alert_dialog_positive_button_register_confirm">Aceptar</string>
     <string name="floating_action_button_home_add_products">Añadir producto</string>
     <string name="menu_log_out">Cerrar sesión</string>
+    <string name="add_product_title">Agregar Producto</string>
+    <string name="add_product_name">Nombre</string>
+    <string name="add_product_name_error">El nombre del producto es requerido</string>
+    <string name="add_product_brand">Marca</string>
+    <string name="add_product_brand_error">La marca del producto es requerida</string>
+    <string name="add_product_category">Categoría</string>
+    <string name="add_product_category_hint">Celulares</string>
+    <string name="add_product_category_error">La categoría del producto es requerida</string>
+    <string name="add_product_price">Precio</string>
+    <string name="add_product_price_error">El precio del producto es requerido</string>
+    <string name="add_product_description">Descripción</string>
+    <string name="add_product_description_hint">Escribe una descripción para tu producto</string>
+    <string name="add_product_description_error">La descripción del producto es requerida</string>
+    <string name="add_product_save">Guardar</string>
+    <string name="add_product_success">Producto añadido correctamente</string>
+    <string name="add_product_error">ERROR al añadir producto</string>
 </resources>

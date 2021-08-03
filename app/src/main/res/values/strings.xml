@@ -41,4 +41,23 @@
     <string name="alert_dialog_positive_button_register_confirm">OK</string>
     <string name="floating_action_button_home_add_products">Add product</string>
     <string name="menu_log_out">Log out</string>
+    <string name="add_product_title">Add Product</string>
+    <string name="add_product_name">Name</string>
+    <string name="add_product_name_hint" translatable="false">OnePlus 9 Pro Morning Mist</string>
+    <string name="add_product_name_error">Product name is required</string>
+    <string name="add_product_brand">Brand</string>
+    <string name="add_product_brand_hint" translatable="false">OnePlus</string>
+    <string name="add_product_brand_error">Product brand is required</string>
+    <string name="add_product_category">Category</string>
+    <string name="add_product_category_hint">Cell Phones</string>
+    <string name="add_product_category_error">Product category is required</string>
+    <string name="add_product_price">Price</string>
+    <string name="add_product_price_hint" translatable="false">4700000</string>
+    <string name="add_product_price_error">Product price is required</string>
+    <string name="add_product_description">Description</string>
+    <string name="add_product_description_hint">Write a description of your product</string>
+    <string name="add_product_description_error">Product description is required</string>
+    <string name="add_product_save">Save</string>
+    <string name="add_product_success">Product added successfully</string>
+    <string name="add_product_error">ERROR adding product</string>
 </resources>
