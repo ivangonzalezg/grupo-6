@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -86,7 +88,11 @@ public class AddProductActivity extends AppCompatActivity {
             product.put("price", productPrice);
             product.put("description", productDescription);
 
-            db.collection("products").document().set(product)
+            FirebaseAuth auth = FirebaseAuth.getInstance();
+            String currentUserUid = auth.getCurrentUser().getUid();
+            DocumentReference userDocumentRef = db.collection("users").document(currentUserUid);
+
+            userDocumentRef.collection("products").document().set(product)
                     .addOnSuccessListener(success -> builder.setMessage(R.string.add_product_success)
                             .setPositiveButton(R.string.add_product_success_button, (dialog, which) -> finish())
                             .show())
