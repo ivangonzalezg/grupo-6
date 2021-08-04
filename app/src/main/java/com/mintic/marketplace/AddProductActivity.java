@@ -3,20 +3,18 @@ package com.mintic.marketplace;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class AddProductActivity extends AppCompatActivity {
-    // private static final String TAG = "AddProductActivity";
     private Activity mySelf;
 
     private EditText productNameEditText;
@@ -79,6 +77,8 @@ public class AddProductActivity extends AppCompatActivity {
                 return;
             }
 
+            AlertDialog.Builder builder = new AlertDialog.Builder(mySelf);
+
             Map<String, String> product = new HashMap<>();
             product.put("name", productName);
             product.put("brand", productBrand);
@@ -87,17 +87,12 @@ public class AddProductActivity extends AppCompatActivity {
             product.put("description", productDescription);
 
             db.collection("products").document().set(product)
-                    .addOnSuccessListener(success -> {
-                        // Log.e(TAG, "Product added successfully");
-                        Snackbar.make(findViewById(R.id.add_product_view), R.string.add_product_success, Snackbar.LENGTH_LONG).show();
-
-                    })
-                    .addOnFailureListener(failure -> {
-                        // Log.e(TAG, "ERROR adding product")
-                        Snackbar.make(findViewById(R.id.add_product_view), R.string.add_product_error, Snackbar.LENGTH_LONG).show();
-                    });
-
-            finish();
+                    .addOnSuccessListener(success -> builder.setMessage(R.string.add_product_success)
+                            .setPositiveButton(R.string.add_product_success_button, (dialog, which) -> finish())
+                            .show())
+                    .addOnFailureListener(failure -> builder.setMessage(R.string.add_product_error)
+                            .setNegativeButton(R.string.add_product_error_button, (dialog, which) -> finish())
+                            .show());
         });
     }
 }

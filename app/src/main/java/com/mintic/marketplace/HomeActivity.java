@@ -3,21 +3,35 @@ package com.mintic.marketplace;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.mintic.marketplace.utils.SharedPref;
 
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "HomeActivity";
+    private Activity mySelf;
+
+    FloatingActionButton addProductFAB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        addProductFAB = findViewById(R.id.add_product_fab);
+
+        mySelf = this;
+
+        addProductFAB.setOnClickListener(v -> {
+            Intent addProductIntent = new Intent(mySelf, AddProductActivity.class);
+            startActivity(addProductIntent);
+        });
     }
 
     @Override

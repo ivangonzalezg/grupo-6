@@ -52,5 +52,7 @@
     <string name="add_product_description_error">La descripción del producto es requerida</string>
     <string name="add_product_save">Guardar</string>
     <string name="add_product_success">Producto añadido correctamente</string>
+    <string name="add_product_success_button">Aceptar</string>
     <string name="add_product_error">ERROR al añadir producto</string>
+    <string name="add_product_error_button">Cancelar</string>
 </resources>
