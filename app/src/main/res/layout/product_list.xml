@@ -6,6 +6,7 @@
     android:paddingVertical="10sp">
 
     <ImageView
+        android:id="@+id/product_photo_imageview"
         android:layout_width="80sp"
         android:layout_height="80sp"
         android:contentDescription="@string/product_list_image_description"

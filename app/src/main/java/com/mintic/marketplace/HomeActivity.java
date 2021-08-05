@@ -67,7 +67,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     Map<String, Object> product = document.getData();
                     productList.add(product);
                 }
-                ProductListAdapter productListAdapter = new ProductListAdapter(productList);
+                ProductListAdapter productListAdapter = new ProductListAdapter(HomeActivity.this, productList);
                 productsListRecycler.setLayoutManager(new LinearLayoutManager(this));
                 productsListRecycler.setAdapter(productListAdapter);
             }

@@ -1,13 +1,16 @@
 package com.mintic.marketplace;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.mintic.marketplace.utils.Constants;
 
 import org.jetbrains.annotations.NotNull;
@@ -22,9 +25,11 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     private static final String TAG = "ProductListAdapter";
 
     ArrayList<Map<String, Object>> productList;
+    Context context;
 
-    public ProductListAdapter(ArrayList<Map<String, Object>> productList) {
+    public ProductListAdapter(Context context, ArrayList<Map<String, Object>> productList) {
         this.productList = productList;
+        this.context = context;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -32,6 +37,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         private final TextView productBrandTextview;
         private final TextView productDescriptionTextview;
         private final TextView productPriceTextview;
+        private final ImageView productPhotoImageView;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -39,6 +45,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             productBrandTextview = itemView.findViewById(R.id.product_brand_textview);
             productDescriptionTextview = itemView.findViewById(R.id.product_description_textview);
             productPriceTextview = itemView.findViewById(R.id.product_price_textview);
+            productPhotoImageView = itemView.findViewById(R.id.product_photo_imageview);
         }
     }
 
@@ -56,6 +63,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         String productBrand = Objects.requireNonNull(productList.get(position).get(Constants.brand)).toString();
         String productDescription = Objects.requireNonNull(productList.get(position).get(Constants.description)).toString();
         String productPrice = Objects.requireNonNull(productList.get(position).get(Constants.price)).toString();
+        String productPhoto = Objects.requireNonNull(productList.get(position).get(Constants.photo)).toString();
 
         if (!productName.isEmpty()) {
             holder.productNameTextview.setText(productName);
@@ -68,6 +76,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         }
         if (!productPrice.isEmpty()) {
             holder.productPriceTextview.setText(NumberFormat.getCurrencyInstance(Locale.US).format(Integer.parseInt(productPrice)));
+        }
+        if (!productPhoto.isEmpty()) {
+            Glide.with(context).load(productPhoto).into(holder.productPhotoImageView);
         }
     }
 
