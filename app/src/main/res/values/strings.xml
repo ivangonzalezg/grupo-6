@@ -62,4 +62,5 @@
     <string name="add_product_success_button">OK</string>
     <string name="add_product_error">ERROR adding product</string>
     <string name="add_product_error_button">Cancel</string>
+    <string name="product_list_image_description">Product image</string>
 </resources>

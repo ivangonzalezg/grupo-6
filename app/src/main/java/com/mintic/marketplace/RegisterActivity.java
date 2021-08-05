@@ -82,7 +82,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     Toast.makeText(this, R.string.register_error_last_name, Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 if (email.isEmpty()) {
                     emailEditText.requestFocus();
                     Toast.makeText(this, R.string.register_error_email, Toast.LENGTH_SHORT).show();

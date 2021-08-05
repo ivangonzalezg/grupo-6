@@ -2,51 +2,76 @@ package com.mintic.marketplace;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.mintic.marketplace.utils.Constants;
 import com.mintic.marketplace.utils.SharedPref;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Objects;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "HomeActivity";
-    private Activity mySelf;
 
     FloatingActionButton addProductFAB;
 
-    private final FirebaseAuth auth = FirebaseAuth.getInstance();
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseAuth auth;
+    FirebaseFirestore db;
 
-    RecyclerView product_list_recycler;
-    ArrayList<Map<String, Object>> product_list = new ArrayList<>();
+    RecyclerView productsListRecycler;
+    SwipeRefreshLayout productsSwipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        mySelf = this;
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
-        product_list_recycler = findViewById(R.id.product_list_recyclerview);
-        product_list_recycler.setLayoutManager(new LinearLayoutManager(this));
-
+        productsListRecycler = findViewById(R.id.products_list_recyclerview);
+        productsSwipeRefreshLayout = findViewById(R.id.products_swipe_refresh_layout);
         addProductFAB = findViewById(R.id.add_product_fab);
-        addProductFAB.setOnClickListener(v -> {
-            Intent addProductIntent = new Intent(mySelf, AddProductActivity.class);
-            startActivity(addProductIntent);
+
+        addProductFAB.setOnClickListener(this);
+        productsSwipeRefreshLayout.setOnRefreshListener(this::getProducts);
+
+        getProducts();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getProducts();
+    }
+
+    private void getProducts() {
+        productsSwipeRefreshLayout.setRefreshing(true);
+        db.collectionGroup(Constants.products).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && !Objects.requireNonNull(task.getResult()).isEmpty()) {
+                ArrayList<Map<String, Object>> productList = new ArrayList<>();
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    Map<String, Object> product = document.getData();
+                    productList.add(product);
+                }
+                ProductListAdapter productListAdapter = new ProductListAdapter(productList);
+                productsListRecycler.setLayoutManager(new LinearLayoutManager(this));
+                productsListRecycler.setAdapter(productListAdapter);
+            }
+            productsSwipeRefreshLayout.setRefreshing(false);
         });
     }
 
@@ -69,23 +94,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-
-        db.collectionGroup("products").get().addOnCompleteListener(task -> {
-            if (task.isSuccessful() && !task.getResult().isEmpty()) {
-                for (QueryDocumentSnapshot document : task.getResult()) {
-                    Map<String, Object> product = document.getData();
-
-                    product_list.add(product);
-                }
-                ProductListAdapter productListAdapter = new ProductListAdapter(product_list);
-                product_list_recycler.setAdapter(productListAdapter);
-                product_list_recycler.addItemDecoration(new DividerItemDecoration(mySelf, DividerItemDecoration.VERTICAL));
-            }
-        });
-
-        // ProductListAdapter productListAdapter = new ProductListAdapter(product_list);
-        // product_list_recycler.setAdapter(productListAdapter);
+    public void onClick(View view) {
+        if (view.getId() == R.id.add_product_fab) {
+            startActivity(new Intent(HomeActivity.this, AddProductActivity.class));
+        }
     }
 }

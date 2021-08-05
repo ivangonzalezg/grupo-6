@@ -27,7 +27,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Button signInButton;
     Button registerButton;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,10 +49,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
                 if (email.isEmpty()) {
+                    emailEditText.requestFocus();
                     Toast.makeText(this, R.string.login_error_email, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (password.isEmpty()) {
+                    passwordEditText.requestFocus();
                     Toast.makeText(this, R.string.login_error_password, Toast.LENGTH_SHORT).show();
                     return;
                 }
