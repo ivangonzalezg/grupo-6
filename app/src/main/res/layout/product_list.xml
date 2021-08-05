@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/listPreferredItemHeightLarge"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/product_name_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="product_name"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/product_price_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="product_price"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

@@ -7,12 +7,11 @@
     android:paddingHorizontal="20dp"
     tools:context=".HomeActivity">
 
-    <!-- TODO: Make adapter to list products -->
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/products_list"
+        android:id="@+id/product_list_recyclerview"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="fill_parent"
+        android:scrollbars="vertical" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_product_fab"
