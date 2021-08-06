@@ -1,6 +1,7 @@
 package com.mintic.marketplace;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,6 +81,20 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         if (!productPhoto.isEmpty()) {
             Glide.with(context).load(productPhoto).into(holder.productPhotoImageView);
         }
+
+        holder.productPhotoImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent description = new Intent(context, ProductDescriptionActivity.class);
+
+                description.putExtra("productName", productName);
+                description.putExtra("productBrand", productBrand);
+                description.putExtra("productDescription", productDescription);
+                description.putExtra("productPrice", productPrice);
+                description.putExtra("productPhoto", productPhoto);
+                context.startActivity(description);
+            }
+        });
     }
 
     @Override
