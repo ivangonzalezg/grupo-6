@@ -37,6 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/add_product_name_hint"
+                android:inputType="textCapSentences"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -59,6 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/add_product_brand_hint"
+                android:inputType="textCapSentences"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -81,6 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/add_product_category_hint"
+                android:inputType="textCapSentences"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -127,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="top|left"
                 android:hint="@string/add_product_description_hint"
-                android:inputType="textMultiLine"
+                android:inputType="textMultiLine|textCapSentences"
                 android:minLines="3"
                 android:textSize="16sp" />
 

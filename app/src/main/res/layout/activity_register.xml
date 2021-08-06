@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/register_first_name_hint"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords|textPersonName"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/register_last_name_hint"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords|textPersonName"
                 android:textSize="16sp" />
 
         </LinearLayout>

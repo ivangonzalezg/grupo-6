@@ -76,24 +76,21 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             holder.productDescriptionTextview.setText(productDescription);
         }
         if (!productPrice.isEmpty()) {
-            holder.productPriceTextview.setText(NumberFormat.getCurrencyInstance(Locale.US).format(Integer.parseInt(productPrice)));
+            NumberFormat numberFormatInstance = NumberFormat.getCurrencyInstance(Locale.US);
+            numberFormatInstance.setMaximumFractionDigits(0);
+            holder.productPriceTextview.setText(numberFormatInstance.format(Integer.parseInt(productPrice)));
         }
         if (!productPhoto.isEmpty()) {
             Glide.with(context).load(productPhoto).into(holder.productPhotoImageView);
         }
-
-        holder.productPhotoImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent description = new Intent(context, ProductDescriptionActivity.class);
-
-                description.putExtra("productName", productName);
-                description.putExtra("productBrand", productBrand);
-                description.putExtra("productDescription", productDescription);
-                description.putExtra("productPrice", productPrice);
-                description.putExtra("productPhoto", productPhoto);
-                context.startActivity(description);
-            }
+        holder.productPhotoImageView.setOnClickListener(v -> {
+            Intent description = new Intent(context, ProductDescriptionActivity.class);
+            description.putExtra(Constants.name, productName);
+            description.putExtra(Constants.brand, productBrand);
+            description.putExtra(Constants.description, productDescription);
+            description.putExtra(Constants.price, productPrice);
+            description.putExtra(Constants.photo, productPhoto);
+            context.startActivity(description);
         });
     }
 

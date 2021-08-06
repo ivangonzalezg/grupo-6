@@ -1,67 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingVertical="10sp">
-
-    <ImageView
-        android:id="@+id/product_photo_imageview_desc"
-        android:layout_width="300sp"
-        android:layout_height="300sp"
-        android:contentDescription="@string/product_list_image_description"
-        android:scaleType="fitCenter"
-        android:src="@drawable/no_image"
-        android:layout_gravity="center"/>
+    android:layout_height="match_parent"
+    tools:context=".ProductDescriptionActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_weight="1"
-        android:gravity="center"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingHorizontal="10sp">
+        android:paddingHorizontal="20dp">
 
-        <TextView
-            android:id="@+id/product_name_textview_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_margin="6dp"
-            android:layout_gravity="center"/>
+        <ImageView
+            android:id="@+id/product_photo_imageview"
+            android:layout_width="300sp"
+            android:layout_height="300sp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/product_list_image_description"
+            android:scaleType="fitCenter"
+            android:src="@drawable/no_image" />
 
-        <TextView
-            android:id="@+id/product_brand_textview_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="12sp"
-            android:layout_margin="6dp"
-            android:layout_gravity="center"/>
-
-        <TextView
-            android:id="@+id/product_description_textview_desc"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="5"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:layout_margin="6dp"/>
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="10sp">
 
-        <TextView
-            android:id="@+id/product_price_textview_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="14sp"
-            android:layout_margin="6dp"/>
+            <TextView
+                android:id="@+id/product_name_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/product_brand_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/product_description_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:ellipsize="end"
+                android:maxLines="5"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/product_price_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:textSize="14sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-
-
-</LinearLayout>
+</ScrollView>

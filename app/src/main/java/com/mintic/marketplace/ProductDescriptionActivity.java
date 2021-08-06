@@ -11,34 +11,27 @@ import com.mintic.marketplace.utils.Constants;
 
 import java.text.NumberFormat;
 import java.util.Locale;
-import java.util.Objects;
 
 public class ProductDescriptionActivity extends AppCompatActivity {
-
-    private TextView productNameTextview;
-    private TextView productBrandTextview;
-    private TextView productDescriptionTextview;
-    private TextView productPriceTextview;
-    private ImageView productPhotoImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_description);
 
-        productNameTextview = findViewById(R.id.product_name_textview_desc);
-        productBrandTextview = findViewById(R.id.product_brand_textview_desc);
-        productDescriptionTextview = findViewById(R.id.product_description_textview_desc);
-        productPriceTextview = findViewById(R.id.product_price_textview_desc);
-        productPhotoImageView = findViewById(R.id.product_photo_imageview_desc);
+        TextView productNameTextview = findViewById(R.id.product_name_textview);
+        TextView productBrandTextview = findViewById(R.id.product_brand_textview);
+        TextView productDescriptionTextview = findViewById(R.id.product_description_textview);
+        TextView productPriceTextview = findViewById(R.id.product_price_textview);
+        ImageView productPhotoImageView = findViewById(R.id.product_photo_imageview);
 
         Bundle bundle = getIntent().getExtras();
 
-        String productName = bundle.getString("productName");
-        String productBrand = bundle.getString("productBrand");
-        String productDescription = bundle.getString("productDescription");
-        String productPrice = bundle.getString("productPrice");
-        String productPhoto = bundle.getString("productPhoto");
+        String productName = bundle.getString(Constants.name);
+        String productBrand = bundle.getString(Constants.brand);
+        String productDescription = bundle.getString(Constants.description);
+        String productPrice = bundle.getString(Constants.price);
+        String productPhoto = bundle.getString(Constants.photo);
 
 
         if (!productName.isEmpty()) {

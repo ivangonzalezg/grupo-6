@@ -32,7 +32,6 @@
                 android:textColor="@color/purple_500"
                 android:textSize="25sp" />
 
-
         </LinearLayout>
 
         <TextView
