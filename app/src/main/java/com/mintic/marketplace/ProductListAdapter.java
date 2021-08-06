@@ -1,52 +1,70 @@
 package com.mintic.marketplace;
 
-import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.mintic.marketplace.utils.Constants;
+import com.mintic.marketplace.utils.Firestore;
+import com.mintic.marketplace.utils.SharedPref;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Objects;
 
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ViewHolder> {
     private static final String TAG = "ProductListAdapter";
 
-    ArrayList<Map<String, Object>> productList;
-    Context context;
+    HomeActivity context;
+    ArrayList<Firestore.Product> productList;
+    ArrayList<String> favorites;
 
-    public ProductListAdapter(Context context, ArrayList<Map<String, Object>> productList) {
-        this.productList = productList;
+    FirebaseFirestore db;
+
+    public ProductListAdapter(HomeActivity context, ArrayList<Firestore.Product> productList, ArrayList<String> favorites) {
         this.context = context;
+        this.productList = productList;
+        this.favorites = favorites;
+
+        this.db = FirebaseFirestore.getInstance();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final LinearLayout productContainerLinearLayout;
         private final TextView productNameTextview;
         private final TextView productBrandTextview;
         private final TextView productDescriptionTextview;
         private final TextView productPriceTextview;
         private final ImageView productPhotoImageView;
+        private final ImageButton productAddToFavoriteImageButton;
+        private final ImageButton productAddToCartImageButton;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
+            productContainerLinearLayout = itemView.findViewById(R.id.product_container_linearlayout);
             productNameTextview = itemView.findViewById(R.id.product_name_textview);
             productBrandTextview = itemView.findViewById(R.id.product_brand_textview);
             productDescriptionTextview = itemView.findViewById(R.id.product_description_textview);
             productPriceTextview = itemView.findViewById(R.id.product_price_textview);
             productPhotoImageView = itemView.findViewById(R.id.product_photo_imageview);
+            productAddToFavoriteImageButton = itemView.findViewById(R.id.product_add_to_favorite_imagebutton);
+            productAddToCartImageButton = itemView.findViewById(R.id.product_add_to_cart_imagebutton);
         }
     }
 
@@ -60,11 +78,68 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull ProductListAdapter.ViewHolder holder, int position) {
-        String productName = Objects.requireNonNull(productList.get(position).get(Constants.name)).toString();
-        String productBrand = Objects.requireNonNull(productList.get(position).get(Constants.brand)).toString();
-        String productDescription = Objects.requireNonNull(productList.get(position).get(Constants.description)).toString();
-        String productPrice = Objects.requireNonNull(productList.get(position).get(Constants.price)).toString();
-        String productPhoto = Objects.requireNonNull(productList.get(position).get(Constants.photo)).toString();
+        String productId = productList.get(position).getId();
+        String productName = productList.get(position).getName();
+        String productBrand = productList.get(position).getBrand();
+        String productDescription = productList.get(position).getDescription();
+        String productPrice = productList.get(position).getPrice();
+        String productPhoto = productList.get(position).getPhoto();
+        String userId = SharedPref.getString(context, Constants.userId);
+        DocumentReference userDocument = db.collection(Constants.users).document(userId);
+        boolean isFavorite = favorites.contains(productId);
+
+        holder.productContainerLinearLayout.setOnClickListener(v -> {
+            Intent description = new Intent(context, ProductDescriptionActivity.class);
+            description.putExtra(Constants.name, productName);
+            description.putExtra(Constants.brand, productBrand);
+            description.putExtra(Constants.description, productDescription);
+            description.putExtra(Constants.price, productPrice);
+            description.putExtra(Constants.photo, productPhoto);
+            context.startActivity(description);
+        });
+
+        if (isFavorite) {
+            holder.productAddToFavoriteImageButton.setImageResource(R.drawable.ic_favorite);
+        } else {
+            holder.productAddToFavoriteImageButton.setImageResource(R.drawable.ic_favorite_border);
+        }
+
+        holder.productAddToFavoriteImageButton.setOnClickListener(v -> {
+                    holder.productAddToFavoriteImageButton.setEnabled(false);
+                    userDocument.get().addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            ArrayList<String> favorites = (ArrayList<String>) Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getData()).get(Constants.favorites);
+                            if (favorites == null) {
+                                favorites = new ArrayList<>();
+                            }
+                            if (isFavorite) {
+                                favorites.remove(productId);
+                            } else {
+                                favorites.add(productId);
+                            }
+                            userDocument.update(Constants.favorites, favorites).addOnCompleteListener(task1 -> {
+                                if (task1.isSuccessful()) {
+                                    if (isFavorite) {
+                                        Toast.makeText(context, R.string.product_list_success_remove_from_favorite, Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(context, R.string.product_list_success_add_to_favorite, Toast.LENGTH_LONG).show();
+                                    }
+                                } else {
+                                    Toast.makeText(context, Objects.requireNonNull(task1.getException()).getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                                holder.productAddToFavoriteImageButton.setEnabled(true);
+                            });
+                        } else {
+                            Toast.makeText(context, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
+                            holder.productAddToFavoriteImageButton.setEnabled(true);
+                        }
+                    });
+                }
+        );
+
+        holder.productAddToCartImageButton.setOnClickListener(v -> {
+            Log.i(TAG, "onBindViewHolder cart: " + productList.get(position).getId());
+        });
 
         if (!productName.isEmpty()) {
             holder.productNameTextview.setText(productName);
@@ -83,15 +158,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         if (!productPhoto.isEmpty()) {
             Glide.with(context).load(productPhoto).into(holder.productPhotoImageView);
         }
-        holder.productPhotoImageView.setOnClickListener(v -> {
-            Intent description = new Intent(context, ProductDescriptionActivity.class);
-            description.putExtra(Constants.name, productName);
-            description.putExtra(Constants.brand, productBrand);
-            description.putExtra(Constants.description, productDescription);
-            description.putExtra(Constants.price, productPrice);
-            description.putExtra(Constants.photo, productPhoto);
-            context.startActivity(description);
-        });
     }
 
     @Override

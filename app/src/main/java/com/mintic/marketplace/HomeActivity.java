@@ -11,16 +11,17 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.mintic.marketplace.utils.Constants;
+import com.mintic.marketplace.utils.Firestore;
 import com.mintic.marketplace.utils.SharedPref;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
@@ -33,6 +34,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     RecyclerView productsListRecycler;
     SwipeRefreshLayout productsSwipeRefreshLayout;
+
+    ArrayList<Firestore.Product> productList = new ArrayList<>();
+    ArrayList<String> productFavorites = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,22 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         productsSwipeRefreshLayout.setOnRefreshListener(this::getProducts);
 
         getProducts();
+
+        String userId = SharedPref.getString(this, Constants.userId);
+        db.collection(Constants.users).document(userId).addSnapshotListener((value, error) -> {
+            if (error != null) {
+                Toast.makeText(HomeActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                return;
+            }
+            if (value != null && value.exists()) {
+                ArrayList<String> favorites = (ArrayList<String>) Objects.requireNonNull(value.getData()).get(Constants.favorites);
+                if (favorites == null) {
+                    favorites = new ArrayList<>();
+                }
+                productFavorites = favorites;
+                renderList();
+            }
+        });
     }
 
     @Override
@@ -62,17 +82,28 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         productsSwipeRefreshLayout.setRefreshing(true);
         db.collectionGroup(Constants.products).get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && !Objects.requireNonNull(task.getResult()).isEmpty()) {
-                ArrayList<Map<String, Object>> productList = new ArrayList<>();
+                productList = new ArrayList<>();
                 for (QueryDocumentSnapshot document : task.getResult()) {
-                    Map<String, Object> product = document.getData();
+                    Firestore.Product product = new Firestore.Product();
+                    product.setId(document.getId());
+                    product.setName((String) document.getData().get(Constants.name));
+                    product.setBrand((String) document.getData().get(Constants.brand));
+                    product.setCategory((String) document.getData().get(Constants.category));
+                    product.setDescription((String) document.getData().get(Constants.description));
+                    product.setPrice((String) document.getData().get(Constants.price));
+                    product.setPhoto((String) document.getData().get(Constants.photo));
                     productList.add(product);
+                    renderList();
                 }
-                ProductListAdapter productListAdapter = new ProductListAdapter(HomeActivity.this, productList);
-                productsListRecycler.setLayoutManager(new LinearLayoutManager(this));
-                productsListRecycler.setAdapter(productListAdapter);
             }
             productsSwipeRefreshLayout.setRefreshing(false);
         });
+    }
+
+    private void renderList() {
+        ProductListAdapter productListAdapter = new ProductListAdapter(HomeActivity.this, productList, productFavorites);
+        productsListRecycler.setLayoutManager(new LinearLayoutManager(this));
+        productsListRecycler.setAdapter(productListAdapter);
     }
 
     @Override

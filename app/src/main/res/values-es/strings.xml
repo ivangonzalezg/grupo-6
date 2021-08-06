@@ -56,4 +56,10 @@
     <string name="add_product_error">ERROR al añadir producto</string>
     <string name="add_product_error_button">Cancelar</string>
     <string name="product_list_image_description">Imagen del producto</string>
+    <string name="product_list_favorite_description">Añadir a favoritos</string>
+    <string name="product_list_cart_description">Añadir al carrito</string>
+    <string name="product_list_success_add_to_favorite">Añadido a favoritos</string>
+    <string name="product_list_success_add_to_cart">Añadido al carrito</string>
+    <string name="product_list_success_remove_from_favorite">Removido de favoritos</string>
+    <string name="product_list_success_remove_from_cart">Removido del carrito</string>
 </resources>

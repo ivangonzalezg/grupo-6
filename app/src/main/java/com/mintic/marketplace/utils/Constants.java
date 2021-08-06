@@ -18,6 +18,7 @@ public class Constants {
     public static final String isUserLoggedIn = "is_user_logged_in";
     public static final String users = "users";
     public static final String products = "products";
+    public static final String favorites = "favorites";
     public static final String name = "name";
     public static final String brand = "brand";
     public static final String category = "category";

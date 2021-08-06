@@ -13,6 +13,7 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class ProductDescriptionActivity extends AppCompatActivity {
+    private static final String TAG = "ProductDescriptionActiv";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,9 @@ public class ProductDescriptionActivity extends AppCompatActivity {
             productDescriptionTextview.setText(productDescription);
         }
         if (!productPrice.isEmpty()) {
-            productPriceTextview.setText(NumberFormat.getCurrencyInstance(Locale.US).format(Integer.parseInt(productPrice)));
+            NumberFormat numberFormatInstance = NumberFormat.getCurrencyInstance(Locale.US);
+            numberFormatInstance.setMaximumFractionDigits(0);
+            productPriceTextview.setText(numberFormatInstance.format(Integer.parseInt(productPrice)));
         }
         if (!productPhoto.isEmpty()) {
             Glide.with(this).load(productPhoto).into(productPhotoImageView);

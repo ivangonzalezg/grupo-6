@@ -63,4 +63,10 @@
     <string name="add_product_error">ERROR adding product</string>
     <string name="add_product_error_button">Cancel</string>
     <string name="product_list_image_description">Product image</string>
+    <string name="product_list_favorite_description">Add to favorites</string>
+    <string name="product_list_cart_description">Add to cart</string>
+    <string name="product_list_success_add_to_favorite">Added to favorites</string>
+    <string name="product_list_success_remove_from_favorite">Removed from favorites</string>
+    <string name="product_list_success_add_to_cart">Added to cart</string>
+    <string name="product_list_success_remove_from_cart">Removed from cart</string>
 </resources>
