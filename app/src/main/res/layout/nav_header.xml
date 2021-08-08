@@ -3,17 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/side_nav_bar"
+    android:background="@color/purple_500"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:paddingHorizontal="16dp"
+    android:paddingTop="50dp"
+    android:paddingBottom="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     tools:ignore="UseCompoundDrawables">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:contentDescription="@string/nav_header_image_description"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_person" />
@@ -22,12 +23,14 @@
         android:id="@+id/nav_header_user_full_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white" />
+        android:textColor="#fafafa"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/nav_header_user_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white" />
+        android:textColor="#fafafa"
+        android:textSize="14sp" />
 
 </LinearLayout>
