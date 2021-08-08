@@ -33,16 +33,16 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     HomeActivity context;
     ArrayList<Firestore.Product> productList;
-    ArrayList<String> favorites;
-    ArrayList<String> cart;
+    ArrayList<String> productsFavorites;
+    ArrayList<String> productsInCart;
 
     FirebaseFirestore db;
 
-    public ProductListAdapter(HomeActivity context, ArrayList<Firestore.Product> productList, ArrayList<String> favorites, ArrayList<String> cart) {
+    public ProductListAdapter(HomeActivity context, ArrayList<Firestore.Product> productList, ArrayList<String> productsFavorites, ArrayList<String> productsInCart) {
         this.context = context;
         this.productList = productList;
-        this.favorites = favorites;
-        this.cart = cart;
+        this.productsFavorites = productsFavorites;
+        this.productsInCart = productsInCart;
 
         this.db = FirebaseFirestore.getInstance();
     }
@@ -88,8 +88,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         String productPhoto = productList.get(position).getPhoto();
         String userId = SharedPref.getString(context, Constants.userId);
         DocumentReference userDocument = db.collection(Constants.users).document(userId);
-        boolean isFavorite = favorites.contains(productId);
-        boolean isInCart = cart.contains(productId);
+        boolean isFavorite = productsFavorites.contains(productId);
+        boolean isInCart = productsInCart.contains(productId);
 
         holder.productContainerLinearLayout.setOnClickListener(v -> {
             Intent description = new Intent(context, ProductDescriptionActivity.class);

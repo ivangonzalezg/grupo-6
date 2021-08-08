@@ -62,4 +62,5 @@
     <string name="product_list_success_add_to_cart">Añadido al carrito</string>
     <string name="product_list_success_remove_from_favorite">Removido de favoritos</string>
     <string name="product_list_success_remove_from_cart">Removido del carrito</string>
+    <string name="menu_cart">Carrito</string>
 </resources>

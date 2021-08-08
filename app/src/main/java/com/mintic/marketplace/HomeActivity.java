@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,8 +38,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     SwipeRefreshLayout productsSwipeRefreshLayout;
 
     ArrayList<Firestore.Product> productList = new ArrayList<>();
-    ArrayList<String> productFavorites = new ArrayList<>();
-    ArrayList<String> productCart = new ArrayList<>();
+    ArrayList<String> productsFavorites = new ArrayList<>();
+    ArrayList<String> productsInCart = new ArrayList<>();
+    Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +70,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 if (favorites == null) {
                     favorites = new ArrayList<>();
                 }
-                productFavorites = favorites;
+                productsFavorites = favorites;
                 ArrayList<String> cart = (ArrayList<String>) Objects.requireNonNull(value.getData()).get(Constants.cart);
                 if (cart == null) {
                     cart = new ArrayList<>();
                 }
-                productCart = cart;
+                productsInCart = cart;
+                verifyCart();
                 renderList();
             }
         });
@@ -107,27 +111,46 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void renderList() {
-        ProductListAdapter productListAdapter = new ProductListAdapter(HomeActivity.this, productList, productFavorites, productCart);
+        ProductListAdapter productListAdapter = new ProductListAdapter(HomeActivity.this, productList, productsFavorites, productsInCart);
         productsListRecycler.setLayoutManager(new LinearLayoutManager(this));
         productsListRecycler.setAdapter(productListAdapter);
+    }
+
+    private void verifyCart() {
+        if (menu != null) {
+            if (productsInCart.size() > 0) {
+                menu.findItem(R.id.cart_item).setVisible(true);
+            } else {
+                menu.findItem(R.id.cart_item).setVisible(false);
+            }
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
+        this.menu = menu;
+        verifyCart();
         return super.onCreateOptionsMenu(menu);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.log_out_item) {
-            auth.signOut();
-            SharedPref.clear(HomeActivity.this);
-            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
+        switch (item.getItemId()) {
+            case R.id.log_out_item:
+                auth.signOut();
+                SharedPref.clear(HomeActivity.this);
+                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                return true;
+            case R.id.cart_item:
+                // TODO: Open cart activity
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

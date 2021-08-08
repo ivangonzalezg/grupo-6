@@ -41,6 +41,7 @@
     <string name="alert_dialog_positive_button_register_confirm">OK</string>
     <string name="floating_action_button_home_add_products">Add product</string>
     <string name="menu_log_out">Log out</string>
+    <string name="menu_cart">Cart</string>
     <string name="add_product_title">Add Product</string>
     <string name="add_product_name">Name</string>
     <string name="add_product_name_hint" translatable="false">OnePlus 9 Pro Morning Mist</string>
