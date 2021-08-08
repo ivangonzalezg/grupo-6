@@ -37,6 +37,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     ArrayList<Firestore.Product> productList = new ArrayList<>();
     ArrayList<String> productFavorites = new ArrayList<>();
+    ArrayList<String> productCart = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     favorites = new ArrayList<>();
                 }
                 productFavorites = favorites;
+                ArrayList<String> cart = (ArrayList<String>) Objects.requireNonNull(value.getData()).get(Constants.cart);
+                if (cart == null) {
+                    cart = new ArrayList<>();
+                }
+                productCart = cart;
                 renderList();
             }
         });
@@ -101,7 +107,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void renderList() {
-        ProductListAdapter productListAdapter = new ProductListAdapter(HomeActivity.this, productList, productFavorites);
+        ProductListAdapter productListAdapter = new ProductListAdapter(HomeActivity.this, productList, productFavorites, productCart);
         productsListRecycler.setLayoutManager(new LinearLayoutManager(this));
         productsListRecycler.setAdapter(productListAdapter);
     }

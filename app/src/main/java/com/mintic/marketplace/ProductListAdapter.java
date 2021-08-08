@@ -34,13 +34,15 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     HomeActivity context;
     ArrayList<Firestore.Product> productList;
     ArrayList<String> favorites;
+    ArrayList<String> cart;
 
     FirebaseFirestore db;
 
-    public ProductListAdapter(HomeActivity context, ArrayList<Firestore.Product> productList, ArrayList<String> favorites) {
+    public ProductListAdapter(HomeActivity context, ArrayList<Firestore.Product> productList, ArrayList<String> favorites, ArrayList<String> cart) {
         this.context = context;
         this.productList = productList;
         this.favorites = favorites;
+        this.cart = cart;
 
         this.db = FirebaseFirestore.getInstance();
     }
@@ -87,6 +89,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         String userId = SharedPref.getString(context, Constants.userId);
         DocumentReference userDocument = db.collection(Constants.users).document(userId);
         boolean isFavorite = favorites.contains(productId);
+        boolean isInCart = cart.contains(productId);
 
         holder.productContainerLinearLayout.setOnClickListener(v -> {
             Intent description = new Intent(context, ProductDescriptionActivity.class);
@@ -102,6 +105,12 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             holder.productAddToFavoriteImageButton.setImageResource(R.drawable.ic_favorite);
         } else {
             holder.productAddToFavoriteImageButton.setImageResource(R.drawable.ic_favorite_border);
+        }
+
+        if (isInCart) {
+            holder.productAddToCartImageButton.setImageResource(R.drawable.ic_remove_shopping_cart);
+        } else {
+            holder.productAddToCartImageButton.setImageResource(R.drawable.ic_add_shopping_cart);
         }
 
         holder.productAddToFavoriteImageButton.setOnClickListener(v -> {
@@ -138,7 +147,35 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         );
 
         holder.productAddToCartImageButton.setOnClickListener(v -> {
-            Log.i(TAG, "onBindViewHolder cart: " + productList.get(position).getId());
+            holder.productAddToCartImageButton.setEnabled(false);
+            userDocument.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    ArrayList<String> cart = (ArrayList<String>) Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getData()).get(Constants.cart);
+                    if (cart == null) {
+                        cart = new ArrayList<>();
+                    }
+                    if (isInCart) {
+                        cart.remove(productId);
+                    } else {
+                        cart.add(productId);
+                    }
+                    userDocument.update(Constants.cart, cart).addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()) {
+                            if (isInCart) {
+                                Toast.makeText(context, R.string.product_list_success_remove_from_cart, Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(context, R.string.product_list_success_add_to_cart, Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(context, Objects.requireNonNull(task1.getException()).getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                        holder.productAddToCartImageButton.setEnabled(true);
+                    });
+                } else {
+                    Toast.makeText(context, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
+                    holder.productAddToCartImageButton.setEnabled(true);
+                }
+            });
         });
 
         if (!productName.isEmpty()) {
