@@ -11,7 +11,9 @@
         android:theme="@style/Theme.Marketplace">
         <activity android:name=".cart.CartActivity" />
         <activity android:name=".AddProductActivity" />
-        <activity android:name=".HomeActivity" />
+        <activity
+            android:name=".HomeActivity"
+            android:theme="@style/Theme.Marketplace.NoActionBar" />
         <activity android:name=".TermsAndConditionsActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />

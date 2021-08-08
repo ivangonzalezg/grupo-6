@@ -2,6 +2,8 @@ package com.mintic.marketplace;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -12,9 +14,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -24,11 +28,15 @@ import com.mintic.marketplace.utils.Constants;
 import com.mintic.marketplace.utils.Firestore;
 import com.mintic.marketplace.utils.SharedPref;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "HomeActivity";
+
+    DrawerLayout drawer;
 
     FloatingActionButton addProductFAB;
 
@@ -47,6 +55,27 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        setSupportActionBar(findViewById(R.id.toolbar));
+        Objects.requireNonNull(getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_menu);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        drawer = findViewById(R.id.drawer_layout);
+
+        String firstName = SharedPref.getString(this, Constants.firstName);
+        String lastName = SharedPref.getString(this, Constants.lastName);
+        String email = SharedPref.getString(this, Constants.email);
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        navigationView.bringToFront();
+        navigationView.setNavigationItemSelectedListener(this);
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView userFullName = (TextView) headerView.findViewById(R.id.nav_header_user_full_name);
+        userFullName.setText(firstName.concat(" ").concat(lastName));
+        TextView userEmail = (TextView) headerView.findViewById(R.id.nav_header_user_email);
+        userEmail.setText(email);
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -120,11 +149,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private void verifyCart() {
         if (menu != null) {
-            if (productsInCart.size() > 0 && productList.size() > 0) {
-                menu.findItem(R.id.cart_item).setVisible(true);
-            } else {
-                menu.findItem(R.id.cart_item).setVisible(false);
-            }
+            menu.findItem(R.id.cart_item).setVisible(productsInCart.size() > 0 && productList.size() > 0);
         }
     }
 
@@ -153,6 +178,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 intentCart.putExtra(Constants.products, new Gson().toJson(productList));
                 startActivity(intentCart);
                 return true;
+            case android.R.id.home:
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                } else {
+                    drawer.openDrawer(GravityCompat.START);
+                }
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -163,5 +195,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if (view.getId() == R.id.add_product_fab) {
             startActivity(new Intent(HomeActivity.this, AddProductActivity.class));
         }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+        if (item.getItemId() == R.id.nav_favorites){
+            // TODO: Open favorites activity
+        }
+        return false;
     }
 }

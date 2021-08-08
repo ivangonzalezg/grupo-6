@@ -66,4 +66,6 @@
     <string name="cart_title">Carrito</string>
     <string name="cart_total">Total:</string>
     <string name="cart_pay">Pagar</string>
+    <string name="nav_header_image_description">Icono de persona</string>
+    <string name="menu_favorites">Favoritos</string>
 </resources>

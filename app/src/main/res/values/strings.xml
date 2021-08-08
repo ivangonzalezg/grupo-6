@@ -73,4 +73,6 @@
     <string name="cart_title">Cart</string>
     <string name="cart_total">Total:</string>
     <string name="cart_pay">Pay</string>
+    <string name="nav_header_image_description">Person icon</string>
+    <string name="menu_favorites">Favorites</string>
 </resources>
