@@ -55,17 +55,17 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
             String productDescription = productDescriptionEditText.getText().toString();
             if (productName.isEmpty()) {
                 productNameEditText.requestFocus();
-                Toast.makeText(this, R.string.add_product_name_error, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.add_product_name_error, Toast.LENGTH_SHORT).show();
                 return;
             }
             if (productBrand.isEmpty()) {
                 productBrandEditText.requestFocus();
-                Toast.makeText(this, R.string.add_product_brand_error, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.add_product_brand_error, Toast.LENGTH_SHORT).show();
                 return;
             }
             if (productCategory.isEmpty()) {
                 productCategoryEditText.requestFocus();
-                Toast.makeText(this, R.string.add_product_category_error, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.add_product_category_error, Toast.LENGTH_SHORT).show();
                 return;
             }
             if (productPrice.isEmpty()) {

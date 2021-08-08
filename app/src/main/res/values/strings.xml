@@ -70,4 +70,7 @@
     <string name="product_list_success_remove_from_favorite">Removed from favorites</string>
     <string name="product_list_success_add_to_cart">Added to cart</string>
     <string name="product_list_success_remove_from_cart">Removed from cart</string>
+    <string name="cart_title">Cart</string>
+    <string name="cart_total">Total:</string>
+    <string name="cart_pay">Pay</string>
 </resources>

@@ -129,17 +129,17 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
                             userDocument.update(Constants.favorites, favorites).addOnCompleteListener(task1 -> {
                                 if (task1.isSuccessful()) {
                                     if (isFavorite) {
-                                        Toast.makeText(context, R.string.product_list_success_remove_from_favorite, Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context, R.string.product_list_success_remove_from_favorite, Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Toast.makeText(context, R.string.product_list_success_add_to_favorite, Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context, R.string.product_list_success_add_to_favorite, Toast.LENGTH_SHORT).show();
                                     }
                                 } else {
-                                    Toast.makeText(context, Objects.requireNonNull(task1.getException()).getMessage(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context, Objects.requireNonNull(task1.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                                 holder.productAddToFavoriteImageButton.setEnabled(true);
                             });
                         } else {
-                            Toast.makeText(context, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                             holder.productAddToFavoriteImageButton.setEnabled(true);
                         }
                     });
@@ -162,17 +162,17 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
                     userDocument.update(Constants.cart, cart).addOnCompleteListener(task1 -> {
                         if (task1.isSuccessful()) {
                             if (isInCart) {
-                                Toast.makeText(context, R.string.product_list_success_remove_from_cart, Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, R.string.product_list_success_remove_from_cart, Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(context, R.string.product_list_success_add_to_cart, Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, R.string.product_list_success_add_to_cart, Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(context, Objects.requireNonNull(task1.getException()).getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, Objects.requireNonNull(task1.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                         }
                         holder.productAddToCartImageButton.setEnabled(true);
                     });
                 } else {
-                    Toast.makeText(context, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                     holder.productAddToCartImageButton.setEnabled(true);
                 }
             });

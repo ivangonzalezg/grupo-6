@@ -9,7 +9,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +18,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.gson.Gson;
+import com.mintic.marketplace.cart.CartActivity;
 import com.mintic.marketplace.utils.Constants;
 import com.mintic.marketplace.utils.Firestore;
 import com.mintic.marketplace.utils.SharedPref;
@@ -62,7 +63,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         String userId = SharedPref.getString(this, Constants.userId);
         db.collection(Constants.users).document(userId).addSnapshotListener((value, error) -> {
             if (error != null) {
-                Toast.makeText(HomeActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(HomeActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                 return;
             }
             if (value != null && value.exists()) {
@@ -104,6 +105,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     product.setPhoto((String) document.getData().get(Constants.photo));
                     productList.add(product);
                     renderList();
+                    verifyCart();
                 }
             }
             productsSwipeRefreshLayout.setRefreshing(false);
@@ -118,7 +120,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private void verifyCart() {
         if (menu != null) {
-            if (productsInCart.size() > 0) {
+            if (productsInCart.size() > 0 && productList.size() > 0) {
                 menu.findItem(R.id.cart_item).setVisible(true);
             } else {
                 menu.findItem(R.id.cart_item).setVisible(false);
@@ -141,12 +143,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.log_out_item:
                 auth.signOut();
                 SharedPref.clear(HomeActivity.this);
-                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                Intent intentLogin = new Intent(HomeActivity.this, LoginActivity.class);
+                intentLogin.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intentLogin);
                 return true;
             case R.id.cart_item:
-                // TODO: Open cart activity
+                Intent intentCart = new Intent(HomeActivity.this, CartActivity.class);
+                intentCart.putExtra(Constants.cart, new Gson().toJson(productsInCart));
+                intentCart.putExtra(Constants.products, new Gson().toJson(productList));
+                startActivity(intentCart);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
