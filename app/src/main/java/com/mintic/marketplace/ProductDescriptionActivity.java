@@ -11,6 +11,7 @@ import com.mintic.marketplace.utils.Constants;
 
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.util.Objects;
 
 public class ProductDescriptionActivity extends AppCompatActivity {
     private static final String TAG = "ProductDescriptionActiv";
@@ -34,6 +35,7 @@ public class ProductDescriptionActivity extends AppCompatActivity {
         String productPrice = bundle.getString(Constants.price);
         String productPhoto = bundle.getString(Constants.photo);
 
+        Objects.requireNonNull(getSupportActionBar()).setTitle(productName);
 
         if (!productName.isEmpty()) {
             productNameTextview.setText(productName);

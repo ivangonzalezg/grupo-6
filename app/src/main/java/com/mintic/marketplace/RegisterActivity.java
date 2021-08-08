@@ -23,6 +23,7 @@ import com.mintic.marketplace.utils.Keyboard;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "RegisterActivity";
@@ -41,6 +42,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.register_title);
 
         firstNameEditText = findViewById(R.id.first_name_edittext);
         lastNameEditText = findViewById(R.id.last_name_edittext);

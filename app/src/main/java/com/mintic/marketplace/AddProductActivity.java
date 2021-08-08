@@ -18,6 +18,7 @@ import com.mintic.marketplace.utils.SharedPref;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class AddProductActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "AddProductActivity";
@@ -34,6 +35,8 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
+
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.add_product_title);
 
         productNameEditText = findViewById(R.id.product_name_edittext);
         productBrandEditText = findViewById(R.id.product_brand_edittext);

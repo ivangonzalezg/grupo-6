@@ -17,6 +17,7 @@ import com.mintic.marketplace.utils.Firestore;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Objects;
 
 public class CartActivity extends AppCompatActivity {
     private static final String TAG = "CartActivity";
@@ -33,6 +34,8 @@ public class CartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.cart_title);
 
         totalTextview = findViewById(R.id.cart_total);
         cartProductsRecycler = findViewById(R.id.cart_products_recyclerview);
