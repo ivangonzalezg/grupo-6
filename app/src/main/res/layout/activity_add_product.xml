@@ -129,6 +129,29 @@
 
         </LinearLayout>
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/add_product_photo"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <ImageButton
+                android:id="@+id/product_photo_image_button"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/ic_add_photo" />
+
+        </LinearLayout>
+
         <Button
             android:id="@+id/add_product_button"
             android:layout_width="match_parent"

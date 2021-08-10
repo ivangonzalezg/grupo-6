@@ -26,4 +26,5 @@ public class Constants {
     public static final String price = "price";
     public static final String description = "description";
     public static final String photo = "photo";
+    public static final String date = "date";
 }

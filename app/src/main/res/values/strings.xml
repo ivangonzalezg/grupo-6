@@ -37,6 +37,8 @@
     <string name="progress_dialog_title">Loading</string>
     <string name="progress_dialog_message_registering">Registering user</string>
     <string name="progress_dialog_message_logging_in">Logging in</string>
+    <string name="progress_dialog_message_image_uploading">Uploading image</string>
+    <string name="progress_dialog_message_product_saving">Saving product</string>
     <string name="alert_dialog_message_register_confirm">Registered user. Sign in with your email and password.</string>
     <string name="alert_dialog_positive_button_register_confirm">OK</string>
     <string name="floating_action_button_home_add_products">Add product</string>
@@ -58,6 +60,9 @@
     <string name="add_product_description">Description</string>
     <string name="add_product_description_hint">Write a description of your product</string>
     <string name="add_product_description_error">Product description is required</string>
+    <string name="add_product_photo">Photo</string>
+    <string name="add_product_photo_error">Error picking photo</string>
+    <string name="add_product_photo_error_upload">Error picking photo</string>
     <string name="add_product_save">Save</string>
     <string name="add_product_success">Product added successfully</string>
     <string name="add_product_success_button">OK</string>
