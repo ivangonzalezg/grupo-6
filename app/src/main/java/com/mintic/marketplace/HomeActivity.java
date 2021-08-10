@@ -24,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.gson.Gson;
 import com.mintic.marketplace.cart.CartActivity;
+import com.mintic.marketplace.favorites.FavoritesActivity;
 import com.mintic.marketplace.utils.Constants;
 import com.mintic.marketplace.utils.Firestore;
 import com.mintic.marketplace.utils.SharedPref;
@@ -200,7 +201,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
         if (item.getItemId() == R.id.nav_favorites){
-            // TODO: Open favorites activity
+            Intent intentFavorites = new Intent(HomeActivity.this, FavoritesActivity.class);
+            intentFavorites.putExtra(Constants.favorites, new Gson().toJson(productsFavorites));
+            intentFavorites.putExtra(Constants.products, new Gson().toJson(productList));
+            startActivity(intentFavorites);
         }
         return false;
     }

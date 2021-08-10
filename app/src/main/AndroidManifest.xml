@@ -4,11 +4,14 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Marketplace">
+        <activity android:name=".favorites.FavoritesActivity"></activity>
         <activity android:name=".cart.CartActivity" />
         <activity android:name=".AddProductActivity" />
         <activity

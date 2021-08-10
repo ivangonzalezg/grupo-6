@@ -68,4 +68,6 @@
     <string name="cart_pay">Pagar</string>
     <string name="nav_header_image_description">Icono de persona</string>
     <string name="menu_favorites">Favoritos</string>
+    <string name="favorites_title">Favoritos</string>
+    <string name="favorites_text">Aún no has agregado favoritos</string>
 </resources>
