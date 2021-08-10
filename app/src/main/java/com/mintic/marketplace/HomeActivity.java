@@ -20,8 +20,8 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.gson.Gson;
 import com.mintic.marketplace.cart.CartActivity;
 import com.mintic.marketplace.utils.Constants;
@@ -44,7 +44,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     FirebaseFirestore db;
 
     RecyclerView productsListRecycler;
-    SwipeRefreshLayout productsSwipeRefreshLayout;
 
     ArrayList<Firestore.Product> productList = new ArrayList<>();
     ArrayList<String> productsFavorites = new ArrayList<>();
@@ -66,28 +65,26 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         String lastName = SharedPref.getString(this, Constants.lastName);
         String email = SharedPref.getString(this, Constants.email);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
 
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(this);
 
         View headerView = navigationView.getHeaderView(0);
-        TextView userFullName = (TextView) headerView.findViewById(R.id.nav_header_user_full_name);
+        TextView userFullName = headerView.findViewById(R.id.nav_header_user_full_name);
         userFullName.setText(firstName.concat(" ").concat(lastName));
-        TextView userEmail = (TextView) headerView.findViewById(R.id.nav_header_user_email);
+        TextView userEmail = headerView.findViewById(R.id.nav_header_user_email);
         userEmail.setText(email);
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
         productsListRecycler = findViewById(R.id.products_list_recyclerview);
-        productsSwipeRefreshLayout = findViewById(R.id.products_swipe_refresh_layout);
+        SwipeRefreshLayout productsSwipeRefreshLayout = findViewById(R.id.products_swipe_refresh_layout);
         addProductFAB = findViewById(R.id.add_product_fab);
 
         addProductFAB.setOnClickListener(this);
-        productsSwipeRefreshLayout.setOnRefreshListener(this::getProducts);
-
-        getProducts();
+        productsSwipeRefreshLayout.setOnRefreshListener(() -> productsSwipeRefreshLayout.setRefreshing(false));
 
         String userId = SharedPref.getString(this, Constants.userId);
         db.collection(Constants.users).document(userId).addSnapshotListener((value, error) -> {
@@ -110,34 +107,32 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 renderList();
             }
         });
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        getProducts();
-    }
-
-    private void getProducts() {
         productsSwipeRefreshLayout.setRefreshing(true);
-        db.collectionGroup(Constants.products).get().addOnCompleteListener(task -> {
-            if (task.isSuccessful() && !Objects.requireNonNull(task.getResult()).isEmpty()) {
-                productList = new ArrayList<>();
-                for (QueryDocumentSnapshot document : task.getResult()) {
-                    Firestore.Product product = new Firestore.Product();
-                    product.setId(document.getId());
-                    product.setName((String) document.getData().get(Constants.name));
-                    product.setBrand((String) document.getData().get(Constants.brand));
-                    product.setCategory((String) document.getData().get(Constants.category));
-                    product.setDescription((String) document.getData().get(Constants.description));
-                    product.setPrice((String) document.getData().get(Constants.price));
-                    product.setPhoto((String) document.getData().get(Constants.photo));
-                    productList.add(product);
-                    renderList();
-                    verifyCart();
-                }
-            }
+        db.collectionGroup(Constants.products).addSnapshotListener((value, error) -> {
             productsSwipeRefreshLayout.setRefreshing(false);
+            if (error != null) {
+                Toast.makeText(HomeActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (value != null) {
+                productList = new ArrayList<>();
+                for (DocumentSnapshot document : value.getDocuments()) {
+                    if (document.getData() != null) {
+                        Firestore.Product product = new Firestore.Product();
+                        product.setId(document.getId());
+                        product.setName((String) document.getData().get(Constants.name));
+                        product.setBrand((String) document.getData().get(Constants.brand));
+                        product.setCategory((String) document.getData().get(Constants.category));
+                        product.setDescription((String) document.getData().get(Constants.description));
+                        product.setPrice((String) document.getData().get(Constants.price));
+                        product.setPhoto((String) document.getData().get(Constants.photo));
+                        productList.add(product);
+                    }
+                }
+                renderList();
+                verifyCart();
+            }
         });
     }
 
@@ -199,7 +194,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
-        if (item.getItemId() == R.id.nav_favorites){
+        if (item.getItemId() == R.id.nav_favorites) {
             // TODO: Open favorites activity
         }
         return false;
