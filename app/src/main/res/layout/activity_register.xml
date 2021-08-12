@@ -22,7 +22,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/register_first_name"
-                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <EditText
@@ -45,7 +44,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/register_last_name"
-                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <EditText
@@ -68,7 +66,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/register_email"
-                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <EditText
@@ -91,7 +88,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/register_password"
-                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <EditText
@@ -123,13 +119,13 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:paddingVertical="5sp"
-                android:text="@string/register_terms_and_conditions"
-                android:textColor="@color/black" />
+                android:text="@string/register_terms_and_conditions" />
 
         </LinearLayout>
 
         <Button
             android:id="@+id/register_button"
+            style="@style/buttonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"

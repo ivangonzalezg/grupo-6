@@ -35,7 +35,6 @@
                 android:id="@+id/product_name_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -52,7 +51,6 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="3"
-                android:textColor="@color/black"
                 android:textSize="14sp" />
 
         </LinearLayout>

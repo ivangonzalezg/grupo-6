@@ -38,7 +38,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/login_title"
-            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
@@ -56,7 +55,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/login_email"
-                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <EditText
@@ -79,7 +77,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/login_password"
-                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <EditText
@@ -94,6 +91,7 @@
 
         <Button
             android:id="@+id/sign_in_button"
+            style="@style/buttonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
@@ -102,13 +100,13 @@
 
         <Button
             android:id="@+id/register_button"
+            style="@style/buttonStyleSecondary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
             android:background="@android:color/transparent"
             android:text="@string/login_register_button"
-            android:textAllCaps="false"
-            android:textColor="@color/black" />
+            android:textAllCaps="false" />
 
     </LinearLayout>
 

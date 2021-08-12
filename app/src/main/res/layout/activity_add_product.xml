@@ -22,7 +22,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/add_product_name"
-                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <EditText
@@ -45,7 +44,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/add_product_brand"
-                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <EditText
@@ -68,7 +66,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/add_product_category"
-                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <EditText
@@ -91,7 +88,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/add_product_price"
-                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <EditText
@@ -114,7 +110,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/add_product_description"
-                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <EditText
@@ -140,7 +135,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/add_product_photo"
-                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <ImageButton
@@ -154,6 +148,7 @@
 
         <Button
             android:id="@+id/add_product_button"
+            style="@style/buttonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
