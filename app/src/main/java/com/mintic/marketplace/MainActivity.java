@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.mintic.marketplace.utils.Constants;
 import com.mintic.marketplace.utils.SharedPref;
+import com.stripe.android.PaymentConfiguration;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -14,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        PaymentConfiguration.init(this, Constants.stripePublishableKey);
 
         boolean isUserLoggedIn = SharedPref.getBoolean(this, Constants.isUserLoggedIn);
 

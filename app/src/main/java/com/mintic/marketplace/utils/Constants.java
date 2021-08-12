@@ -27,4 +27,5 @@ public class Constants {
     public static final String description = "description";
     public static final String photo = "photo";
     public static final String date = "date";
+    public static final String stripePublishableKey = "pk_test_51JNTdOCi9FysmMS0q6KBYvqs33frHVu7KIrdukxTVEKol4Sc1csyW8sHMCF7gKACVRghcWHTqTWcFnXjZBnHyabp00apdPrdrm";
 }

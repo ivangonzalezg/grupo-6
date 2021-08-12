@@ -39,6 +39,7 @@
     <string name="progress_dialog_message_logging_in">Logging in</string>
     <string name="progress_dialog_message_image_uploading">Uploading image</string>
     <string name="progress_dialog_message_product_saving">Saving product</string>
+    <string name="progress_dialog_message_generating_payment">Generating payment</string>
     <string name="alert_dialog_message_register_confirm">Registered user. Sign in with your email and password.</string>
     <string name="alert_dialog_positive_button_register_confirm">OK</string>
     <string name="floating_action_button_home_add_products">Add product</string>

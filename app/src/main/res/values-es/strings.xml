@@ -75,4 +75,5 @@
     <string name="progress_dialog_message_product_saving">Guardando producto</string>
     <string name="favorites_title">Favoritos</string>
     <string name="favorites_text">Aún no has agregado favoritos</string>
+    <string name="progress_dialog_message_generating_payment">Generando pago</string>
 </resources>
