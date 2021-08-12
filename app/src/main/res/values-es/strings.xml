@@ -76,4 +76,6 @@
     <string name="favorites_title">Favoritos</string>
     <string name="favorites_text">Aún no has agregado favoritos</string>
     <string name="progress_dialog_message_generating_payment">Generando pago</string>
+    <string name="product_description_see_location">Ver ubicación</string>
+    <string name="title_activity_maps">Mapa</string>
 </resources>

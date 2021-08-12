@@ -83,4 +83,6 @@
     <string name="menu_favorites">Favorites</string>
     <string name="favorites_title">Favorites</string>
     <string name="favorites_text">You have not added favorites yet</string>
+    <string name="product_description_see_location">See location</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

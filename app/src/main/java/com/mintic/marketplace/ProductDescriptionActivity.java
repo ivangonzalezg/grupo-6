@@ -2,7 +2,11 @@ package com.mintic.marketplace;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,7 +17,7 @@ import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Objects;
 
-public class ProductDescriptionActivity extends AppCompatActivity {
+public class ProductDescriptionActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "ProductDescriptionActiv";
 
     @Override
@@ -26,6 +30,9 @@ public class ProductDescriptionActivity extends AppCompatActivity {
         TextView productDescriptionTextview = findViewById(R.id.product_description_textview);
         TextView productPriceTextview = findViewById(R.id.product_price_textview);
         ImageView productPhotoImageView = findViewById(R.id.product_photo_imageview);
+        Button seeLocationButton = findViewById(R.id.product_see_location_button);
+
+        seeLocationButton.setOnClickListener(this);
 
         Bundle bundle = getIntent().getExtras();
 
@@ -53,6 +60,13 @@ public class ProductDescriptionActivity extends AppCompatActivity {
         }
         if (!productPhoto.isEmpty()) {
             Glide.with(this).load(productPhoto).into(productPhotoImageView);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.product_see_location_button) {
+            startActivity(new Intent(ProductDescriptionActivity.this, MapsActivity.class));
         }
     }
 }
